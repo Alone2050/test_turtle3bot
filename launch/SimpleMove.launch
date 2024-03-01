@@ -1,0 +1,32 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="model" default="waffle" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="add_obstacles" default="false"/>
+  <arg name="record_rgbd" default="false"/>
+
+  <!--   Gazebo Module -->
+  <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch">
+    <arg name="model" value="$(arg model)" />
+  </include>
+
+  <!--   Navigation Module -->
+  <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+    <arg name="model" value="$(arg model)" />
+  </include>
+
+  <!--   Mission Planner Module -->
+  <node pkg="test_turtlebot3" name="mission_planner" type="MissionPlanner.py" cwd="node" />
+
+  <!--   Dynamic Obstacles Module -->
+  <group if="$(arg add_obstacles)">
+    <node pkg="test_turtle3bot" name="obstacle_controller" type="ObstacleController.py" cwd="node" />
+  </group>
+
+  <!--   Rosbag Recorder Module -->
+  <group if="$(arg record_rgbd)">
+    <node pkg="rosbag" name="record" type="record" cwd="node"
+    args='record -O $(find test_turtle3bot)/bag/rgbd.bag --duration=2m /camera/rgb/image_raw /camera/depth/image_raw' />
+  </group>
+
+  
+</launch>

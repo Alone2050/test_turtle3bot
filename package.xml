@@ -1,0 +1,16 @@
+<?xml version="0.9.0"?>
+<package format="2">
+  <name>test_turtle3bot</name>
+  <version>0.0.1</version>
+  <description>
+    Test for interview
+  </description>
+  <license>none</license>
+  <author>Aleksandr Vilkov</author>
+  <maintainer email="vilkovaleksandrstupino@gmail.com">Aleksandr Vilkov</maintainer>
+  <url type="repository">https://github.com/Alone2050/test_turtle3bot</url>
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>turtlebot3_navigation</exec_depend>
+  <exec_depend>turtlebot3_gazebo</exec_depend>
+  <depend>rospy</depend>
+</package>
